@@ -17,16 +17,19 @@ O sistema permite:
 ```sh
 git clone https://github.com/RodrigoMartinsMoraes-Z/TesteLeilao.git
 cd TesteLeilao
+```
 
 ### 2. Crie e ative um ambiente virtual:
 ```sh
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
 venv\Scripts\activate  # Windows
+```
 
 ### 3. Instale as dependências:
 ```sh
 pip install -r requirements.txt
+```
 
 ### 4. Configure o banco de dados:
 Crie um arquivo .env na raiz do projeto com as seguintes variáveis:
@@ -38,20 +41,23 @@ DB_USER='usuario'
 DB_PASSWORD='senha'
 DB_HOST='localhost'
 DB_PORT='5432'
-
+```
 
 ### 5. Execute as migrações:
 ```sh
 python manage.py makemigrations
 python manage.py migrate
+```
 
 ### 6. Crie um superusuário::
 ```sh
 python manage.py createsuperuser
+```
 
 ### 7. Execute o servidor de desenvolvimento:
 ```sh
 python manage.py runserver
+```
 
 8. Acesse a aplicação:
 Admin: http://localhost:8000/admin
