@@ -25,8 +25,13 @@ def home_view(request):
     else:
         matricula_form = MatriculaForm()
 
+    query = request.GET.get('q')
+    if query:
+        anexos_list = Anexo.objects.filter(leiloeiro=leiloeiro, arquivo__icontains=query).order_by('-id')
+    else:
+        anexos_list = Anexo.objects.filter(leiloeiro=leiloeiro).order_by('-id')
+
     matriculas = Matricula.objects.filter(leiloeiro=leiloeiro)
-    anexos_list = Anexo.objects.filter(leiloeiro=leiloeiro).order_by('-id')
     paginator = Paginator(anexos_list, 5)  
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

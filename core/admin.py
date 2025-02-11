@@ -8,7 +8,6 @@ admin.site.register(Matricula)
 admin.site.register(Anexo)
 admin.site.register(Estado)
 
-@admin.register(Anexo)
 class AnexoAdmin(admin.ModelAdmin):
     list_display = ('arquivo', 'leiloeiro', 'matricula')
     search_fields = ('leiloeiro__nome', 'matricula__numero')
