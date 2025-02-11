@@ -120,3 +120,11 @@ STATIC_URL = '/static/'
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 
 LOGIN_URL = '/login/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.example.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'leilao@example.com'
+EMAIL_HOST_PASSWORD = 'senhadoemail'
+DEFAULT_FROM_EMAIL = 'webmasterleilao@example.com'

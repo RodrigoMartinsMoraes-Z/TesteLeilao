@@ -44,6 +44,7 @@
     <Compile Include="core\models.py" />
     <Compile Include="core\tests.py" />
     <Compile Include="core\urls.py" />
+    <Compile Include="core\utils.py" />
     <Compile Include="core\views.py" />
     <Compile Include="core\__init__.py" />
     <Compile Include="manage.py" />
@@ -69,6 +70,7 @@
     <Folder Include="TesteLeilao\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="core\templates\core\email_notificacao.html" />
     <Content Include="core\templates\core\home.html" />
     <Content Include="core\templates\core\login.html" />
     <Content Include="core\templates\core\perfil.html" />

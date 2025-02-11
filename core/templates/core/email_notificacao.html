@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifica&ccedil;ao de Novo Anexo</title>
+</head>
+<body>
+    <p>Ola {{ leiloeiro.nome }},</p>
+    <p>Um novo anexo foi adicionado a sua conta:</p>
+    <ul>
+        <li>Arquivo: <a href="{{ anexo.arquivo.url }}">{{ anexo.arquivo.name }}</a></li>
+        <li>Data de Upload: {{ anexo.uploaded_at }}</li>
+    </ul>
+    <p>Atenciosamente,</p>
+    <p>Equipe de Suporte</p>
+</body>
+</html>
