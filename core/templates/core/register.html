@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .register-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .form-group {
+            text-align: left; /* Alinhando r&oacute;tulos e campos &agrave; esquerda */
+        }
+
+        .errorlist {
+            color: red;
+            list-style-type: none;
+            padding-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container register-container">
+        <h2 class="text-center">Criar Conta</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Usu&aacute;rio:</label>
+                {{ user_form.username }}
+                <ul class="errorlist">{{ user_form.username.errors }}</ul>
+            </div>
+            <div class="form-group">
+                <label for="id_email">Email:</label>
+                {{ user_form.email }}
+                <ul class="errorlist">{{ user_form.email.errors }}</ul>
+            </div>
+            <div class="form-group">
+                <label for="id_password1">Senha:</label>
+                {{ user_form.password1 }}
+                <ul class="errorlist">{{ user_form.password1.errors }}</ul>
+            </div>
+            <div class="form-group">
+                <label for="id_password2">Confirme a Senha:</label>
+                {{ user_form.password2 }}
+                <ul class="errorlist">{{ user_form.password2.errors }}</ul>
+            </div>
+            <div class="form-group">
+                <label for="id_nome">Nome:</label>
+                {{ leiloeiro_form.nome }}
+                <ul class="errorlist">{{ leiloeiro_form.nome.errors }}</ul>
+            </div>
+            <div class="form-group">
+                <label for="id_cpf">CPF:</label>
+                {{ leiloeiro_form.cpf }}
+                <ul class="errorlist">{{ leiloeiro_form.cpf.errors }}</ul>
+            </div>
+            <div class="form-group">
+                <label for="id_telefone">Telefone:</label>
+                {{ leiloeiro_form.telefone }}
+                <ul class="errorlist">{{ leiloeiro_form.telefone.errors }}</ul>
+            </div>
+            <div class="form-group">
+                <label for="id_site">Site:</label>
+                {{ leiloeiro_form.site }}
+                <ul class="errorlist">{{ leiloeiro_form.site.errors }}</ul>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+        </form>
+        <div class="text-center mt-3">
+            <p>J&aacute; tem uma conta? <a href="{% url 'login' %}">Fa&ccedil;a login</a></p>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

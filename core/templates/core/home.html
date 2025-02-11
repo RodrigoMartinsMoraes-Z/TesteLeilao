@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .home-container {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+
+        .table-container {
+            margin-top: 20px;
+        }
+
+        .errorlist {
+            color: red;
+            list-style-type: none;
+            padding-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container home-container">
+        <h2 class="text-center">Bem-vindo, {{ request.user.username }}!</h2>
+        <a href="{% url 'logout' %}" class="btn btn-danger float-right">Logout</a>
+
+        <h3>Suas Matr&iacute;culas</h3>
+        {% if matriculas %}
+        <div class="table-container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>N&uacute;mero</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for matricula in matriculas %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ matricula.numero }}</td>
+                        <td>{{ matricula.estado.nome }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="alert alert-warning text-center">
+            Voc&ecirc; ainda n&atilde;o cadastrou uma matr&iacute;cula. Por favor, cadastre uma abaixo.
+        </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_numero">N&uacute;mero da Matr&iacute;cula:</label>
+                {{ matricula_form.numero }}
+                <ul class="errorlist">{{ matricula_form.numero.errors }}</ul>
+            </div>
+            <div class="form-group">
+                <label for="id_estado">Estado:</label>
+                {{ matricula_form.estado }}
+                <ul class="errorlist">{{ matricula_form.estado.errors }}</ul>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Cadastrar Nova Matr&iacute;cula</button>
+        </form>
+
+        <h3>Seus Anexos</h3>
+        <div class="table-container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Arquivo</th>
+                        <th>Data de Upload</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for anexo in page_obj %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><a href="{{ anexo.arquivo.url }}">{{ anexo.arquivo.name }}</a></td>
+                        <td>{{ anexo.arquivo.uploaded_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- Paginacao -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">Primeira</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                </li>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                <li class="page-item active">
+                    <span class="page-link">{{ num }}</span>
+                </li>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Pr&oacute;xima</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">&Uacute;ltima</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
